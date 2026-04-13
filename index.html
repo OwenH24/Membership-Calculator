@@ -115,18 +115,11 @@
 function calculate() {
   let age = document.getElementById("age").value;
   let activity = document.getElementById("activity").value;
-  let visits = document.getElementById("visits").value;
-
-  // Validation
-  if (!age || !activity || !visits) {
-    alert("Please select all options before calculating");
-    return;
-  }
-
-  visits = parseInt(visits);
+  let visits = parseInt(document.getElementById("visits").value);
 
   let price = 0;
 
+  // PAYG pricing
   if (activity === "swim") {
     price = (age === "junior") ? 4.85 : 7.05;
   } else if (activity === "gym") {
@@ -149,46 +142,32 @@ function calculate() {
 
   let monthly = price * visits * 4;
 
-  // Default full membership
-let membership = 60;
-let name = "Premium Membership";
-
-if (age === "senior") { membership = 51; name = "Premium Concession Membership"; }
-else if (age === "young") { membership = 45; name = "Premium 19-25 Membership"; }
-else if (age === "teen") { membership = 35; name = "Premium 16-18 Membership"; }
-else if (age === "junior") { membership = 24; name = "Junior 11-15 Membership"; }
-
-// Swim only option
-let swimOnlyPrice = 30;
-let swimOnlyName = "Swim Only Membership";
-
-// Work out best option
-let bestPrice = membership;
-let bestName = name;
-
-if (activity === "swim") {
-  if (swimOnlyPrice < bestPrice) {
-    bestPrice = swimOnlyPrice;
-    bestName = swimOnlyName;
-  }
-}
-
-// Compare PAYG vs best membership
-let savings = monthly - bestPrice;
-
-let recommendation = savings > 0 
-  ? "💡 " + bestName + " is the best option"
-  : "💡 Pay as you go is cheaper";
+  // Full membership
+  let membership = 60;
+  let name = "Premium Membership";
 
   if (age === "senior") { membership = 51; name = "Premium Concession Membership"; }
   else if (age === "young") { membership = 45; name = "Premium 19-25 Membership"; }
   else if (age === "teen") { membership = 35; name = "Premium 16-18 Membership"; }
   else if (age === "junior") { membership = 24; name = "Junior 11-15 Membership"; }
 
-  let savings = monthly - membership;
+  // Swim only
+  let swimOnlyPrice = 30;
+  let swimOnlyName = "Swim Only Membership";
+
+  // Pick best membership
+  let bestPrice = membership;
+  let bestName = name;
+
+  if (activity === "swim" && swimOnlyPrice < bestPrice) {
+    bestPrice = swimOnlyPrice;
+    bestName = swimOnlyName;
+  }
+
+  let savings = monthly - bestPrice;
 
   let recommendation = savings > 0 
-    ? "💡 Membership is the better option"
+    ? "💡 " + bestName + " is the best option"
     : "💡 Pay as you go is cheaper";
 
   let result = document.getElementById("result");
