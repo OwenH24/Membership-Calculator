@@ -7,7 +7,7 @@
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      background: linear-gradient(135deg, #ff7e5f, #feb47b);
       margin: 0;
       display: flex;
       justify-content: center;
@@ -28,7 +28,14 @@
 
     h1 {
       margin-bottom: 5px;
-      color: #2c5364;
+      color: #ff7e5f;
+    }
+
+    h2 {
+      margin-top: 0;
+      font-size: 16px;
+      color: #888;
+      font-weight: normal;
     }
 
     p.subtitle {
@@ -59,7 +66,7 @@
       padding: 14px;
       border: none;
       border-radius: 12px;
-      background: linear-gradient(135deg, #2c5364, #203a43);
+      background: linear-gradient(135deg, #ff7e5f, #feb47b);
       color: white;
       font-size: 16px;
       cursor: pointer;
@@ -71,11 +78,16 @@
       box-shadow: 0 10px 20px rgba(0,0,0,0.2);
     }
 
+    .join-btn {
+      background: linear-gradient(135deg, #ff512f, #dd2476);
+      margin-top: 10px;
+    }
+
     .result {
       margin-top: 20px;
       padding: 20px;
       border-radius: 15px;
-      background: #f5f7fa;
+      background: #fff3e6;
     }
 
     .saving {
@@ -92,12 +104,19 @@
       font-weight: bold;
       font-size: 16px;
     }
+
+    .note {
+      margin-top: 10px;
+      font-size: 13px;
+      color: #666;
+    }
   </style>
 </head>
 <body>
 
 <div class="container">
   <h1>Membership Calculator</h1>
+  <h2>Bulmershe Leisure Centre</h2>
   <p class="subtitle">Find the best value for your visits</p>
 
   <label>Age Group</label>
@@ -126,6 +145,11 @@
   <button onclick="calculate()">Calculate</button>
 
   <div class="result" id="result" style="display:none;"></div>
+
+  <button class="join-btn" onclick="window.open('https://www.placesleisure.org/centres/bulmershe-leisure-centre/', '_blank')">
+    Join Now
+  </button>
+  <p class="note">Or come to reception to sign up</p>
 </div>
 
 <script>
@@ -136,7 +160,6 @@ function calculate() {
 
   let price = 0;
 
-  // Pricing logic FIXED
   if (activity === "swim") {
     price = (age === "junior") ? 4.85 : 7.05;
   } else if (activity === "gym") {
