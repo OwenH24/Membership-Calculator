@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+  </select>
+
+  <label>Activity</label>
+  <select id="activity">
+    <option value="swim">Swimming</option>
+    <option value="gym">Gym</option>
+    <option value="class">Fitness Class</option>
+    <option value="aqua">Aqua Fit</option>
+  </select>
+
+  <label>Times per week</label>
+  <select id="visits">
+    <option>1</option><option>2</option><option>3</option>
+    <option>4</option><option>5</option><option>6</option><option>7</option>
+  </select>
+
+  <button onclick="calculate()">Calculate Savings</button>
+
+  <div class="result" id="result" style="display:none;"></div>
+</div>
+
+<script>
+function calculate() {
+  let age = document.getElementById("age").value;
+  let activity = document.getElementById("activity").value;
+  let visits = parseInt(document.getElementById("visits").value);
+
+  let price = 0;
+
+  // PAYG pricing
+  if (activity === "swim") {
+    price = (age === "junior") ? 4.85 : 7.05;
+  }
+  if (activity === "gym") {
+    if (age === "junior") price = 7.70;
+    else if (age === "senior") price = 7.70;
+    else price = 13.65;
+  }
+  if (activity === "class") {
+    price = (age === "senior") ? 6.20 : 11.05;
+  }
+  if (activity === "aqua") {
+    price = (age === "senior") ? 6.20 : 9.55;
+  }
+
+  let weekly = price * visits;
+  let monthly = weekly * 4;
+
+  // Membership pricing
+  let membership = 60;
+  let membershipName = "Premium";
+
+  if (age === "senior") {
+    membership = 51;
+    membershipName = "Premium Concession";
+  }
+  if (age === "young") {
+    membership = 45;
+    membershipName = "Premium 19-25";
+  }
+  if (age === "teen") {
+    membership = 35;
+    membershipName = "Premium 16-18";
+  }
+  if (age === "junior") {
+    membership = 24;
+    membershipName = "Junior 11-15";
+  }
+
+  let savings = monthly - membership;
+
+  let resultDiv = document.getElementById("result");
+  resultDiv.style.display = "block";
+
+  resultDiv.innerHTML = `
+    <p><strong>Monthly PAYG:</strong> £${monthly.toFixed(2)}</p>
+    <p><strong>Membership:</strong> ${membershipName} (£${membership})</p>
+    <p class="saving ${savings >= 0 ? 'positive' : 'negative'}">
+      ${savings >= 0 ? 'You Save' : 'You Lose'}: £${Math.abs(savings).toFixed(2)}
+    </p>
+  `;
+}
+</script>
+
+</body>
+</html>
