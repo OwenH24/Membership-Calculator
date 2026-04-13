@@ -149,8 +149,36 @@ function calculate() {
 
   let monthly = price * visits * 4;
 
-  let membership = 60;
-  let name = "Premium Membership";
+  // Default full membership
+let membership = 60;
+let name = "Premium Membership";
+
+if (age === "senior") { membership = 51; name = "Premium Concession Membership"; }
+else if (age === "young") { membership = 45; name = "Premium 19-25 Membership"; }
+else if (age === "teen") { membership = 35; name = "Premium 16-18 Membership"; }
+else if (age === "junior") { membership = 24; name = "Junior 11-15 Membership"; }
+
+// Swim only option
+let swimOnlyPrice = 30;
+let swimOnlyName = "Swim Only Membership";
+
+// Work out best option
+let bestPrice = membership;
+let bestName = name;
+
+if (activity === "swim") {
+  if (swimOnlyPrice < bestPrice) {
+    bestPrice = swimOnlyPrice;
+    bestName = swimOnlyName;
+  }
+}
+
+// Compare PAYG vs best membership
+let savings = monthly - bestPrice;
+
+let recommendation = savings > 0 
+  ? "💡 " + bestName + " is the best option"
+  : "💡 Pay as you go is cheaper";
 
   if (age === "senior") { membership = 51; name = "Premium Concession Membership"; }
   else if (age === "young") { membership = 45; name = "Premium 19-25 Membership"; }
@@ -168,7 +196,7 @@ function calculate() {
 
   result.innerHTML = `
     <p><strong>Monthly PAYG:</strong> £${monthly.toFixed(2)}</p>
-    <p><strong>${name}:</strong> £${membership}</p>
+    <p><strong>${bestName}:</strong> £${bestPrice}</p>
     <p class="saving ${savings >= 0 ? 'positive' : 'negative'}">
       ${savings >= 0 ? 'You Save' : 'You Lose'} £${Math.abs(savings).toFixed(2)}
     </p>
