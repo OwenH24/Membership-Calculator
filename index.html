@@ -32,7 +32,7 @@
 
     label { text-align: left; display: block; margin-top: 15px; font-weight: 600; }
 
-    select {
+     {
       width: 100%;
       padding: 10px;
       margin-top: 5px;
@@ -76,30 +76,30 @@
   <p class="subtitle">Find the best value for your visits</p>
 
   <label>Age Group</label>
-  <select id="age">
-    <option value="" disabled selected>Please select</option>
-    <option value="junior">11-15</option>
-    <option value="teen">16-18</option>
-    <option value="young">19-25</option>
-    <option value="adult">26-59</option>
-    <option value="senior">60+</option>
-  </select>
+  <select id="age" required>
+  <option value="" disabled selected hidden>Please select</option>
+  <option value="junior">11-15</option>
+  <option value="teen">16-18</option>
+  <option value="young">19-25</option>
+  <option value="adult">26-59</option>
+  <option value="senior">60+</option>
+</select>
 
   <label>Activity</label>
-  <select id="activity">
-    <option value="" disabled selected>Please select</option>
-    <option value="swim">Swimming</option>
-    <option value="gym">Gym</option>
-    <option value="class">Fitness Class</option>
-    <option value="aqua">Aqua Fit</option>
-  </select>
+  <select id="activity" required>
+  <option value="" disabled selected hidden>Please select</option>
+  <option value="swim">Swimming</option>
+  <option value="gym">Gym</option>
+  <option value="class">Fitness Class</option>
+  <option value="aqua">Aqua Fit</option>
+</select>
 
   <label>Times per week</label>
-  <select id="visits">
-    <option value="" disabled selected>Please select</option>
-    <option>1</option><option>2</option><option>3</option>
-    <option>4</option><option>5</option><option>6</option><option>7</option>
-  </select>
+  <select id="visits" required>
+  <option value="" disabled selected hidden>Please select</option>
+  <option>1</option><option>2</option><option>3</option>
+  <option>4</option><option>5</option><option>6</option><option>7</option>
+</select>
 
   <button onclick="calculate()">Calculate</button>
 
