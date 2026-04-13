@@ -26,30 +26,11 @@
       text-align: center;
     }
 
-    h1 {
-      margin-bottom: 5px;
-      color: #ff7e5f;
-    }
+    h1 { margin-bottom: 5px; color: #ff7e5f; }
+    h2 { margin-top: 0; font-size: 16px; color: #888; font-weight: normal; }
+    p.subtitle { font-size: 14px; color: #777; margin-bottom: 20px; }
 
-    h2 {
-      margin-top: 0;
-      font-size: 16px;
-      color: #888;
-      font-weight: normal;
-    }
-
-    p.subtitle {
-      font-size: 14px;
-      color: #777;
-      margin-bottom: 20px;
-    }
-
-    label {
-      text-align: left;
-      display: block;
-      margin-top: 15px;
-      font-weight: 600;
-    }
+    label { text-align: left; display: block; margin-top: 15px; font-weight: 600; }
 
     select {
       width: 100%;
@@ -73,43 +54,18 @@
       transition: 0.3s;
     }
 
-    button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-    }
+    button:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
 
-    .join-btn {
-      background: linear-gradient(135deg, #ff512f, #dd2476);
-      margin-top: 10px;
-    }
+    .join-btn { background: linear-gradient(135deg, #ff512f, #dd2476); margin-top: 10px; }
 
-    .result {
-      margin-top: 20px;
-      padding: 20px;
-      border-radius: 15px;
-      background: #fff3e6;
-    }
+    .result { margin-top: 20px; padding: 20px; border-radius: 15px; background: #fff3e6; }
 
-    .saving {
-      font-size: 22px;
-      font-weight: bold;
-      margin-top: 10px;
-    }
-
+    .saving { font-size: 22px; font-weight: bold; margin-top: 10px; }
     .positive { color: #1aa34a; }
     .negative { color: #d93025; }
 
-    .recommend {
-      margin-top: 10px;
-      font-weight: bold;
-      font-size: 16px;
-    }
-
-    .note {
-      margin-top: 10px;
-      font-size: 13px;
-      color: #666;
-    }
+    .recommend { margin-top: 10px; font-weight: bold; font-size: 16px; }
+    .note { margin-top: 10px; font-size: 13px; color: #666; }
   </style>
 </head>
 <body>
@@ -121,6 +77,7 @@
 
   <label>Age Group</label>
   <select id="age">
+    <option value="" disabled selected>Please select</option>
     <option value="junior">11-15</option>
     <option value="teen">16-18</option>
     <option value="young">19-25</option>
@@ -130,6 +87,7 @@
 
   <label>Activity</label>
   <select id="activity">
+    <option value="" disabled selected>Please select</option>
     <option value="swim">Swimming</option>
     <option value="gym">Gym</option>
     <option value="class">Fitness Class</option>
@@ -138,6 +96,7 @@
 
   <label>Times per week</label>
   <select id="visits">
+    <option value="" disabled selected>Please select</option>
     <option>1</option><option>2</option><option>3</option>
     <option>4</option><option>5</option><option>6</option><option>7</option>
   </select>
@@ -156,7 +115,15 @@
 function calculate() {
   let age = document.getElementById("age").value;
   let activity = document.getElementById("activity").value;
-  let visits = parseInt(document.getElementById("visits").value);
+  let visits = document.getElementById("visits").value;
+
+  // Validation
+  if (!age || !activity || !visits) {
+    alert("Please select all options before calculating");
+    return;
+  }
+
+  visits = parseInt(visits);
 
   let price = 0;
 
