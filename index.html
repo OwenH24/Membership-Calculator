@@ -150,12 +150,12 @@ function calculate() {
   let monthly = price * visits * 4;
 
   let membership = 60;
-  let name = "Premium";
+  let name = "Premium Membership";
 
-  if (age === "senior") { membership = 51; name = "Premium Concession"; }
-  else if (age === "young") { membership = 45; name = "Premium 19-25"; }
-  else if (age === "teen") { membership = 35; name = "Premium 16-18"; }
-  else if (age === "junior") { membership = 24; name = "Junior 11-15"; }
+  if (age === "senior") { membership = 51; name = "Premium Concession Membership"; }
+  else if (age === "young") { membership = 45; name = "Premium 19-25 Membership"; }
+  else if (age === "teen") { membership = 35; name = "Premium 16-18 Membership"; }
+  else if (age === "junior") { membership = 24; name = "Junior 11-15 Membership"; }
 
   let savings = monthly - membership;
 
