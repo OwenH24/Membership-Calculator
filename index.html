@@ -115,7 +115,14 @@
 function calculate() {
   let age = document.getElementById("age").value;
   let activity = document.getElementById("activity").value;
-  let visits = parseInt(document.getElementById("visits").value);
+  let visits = document.getElementById("visits").value;
+
+  if (!age || !activity || !visits) {
+    alert("Please select all options before calculating");
+    return;
+  }
+
+  visits = parseInt(visits);
 
   let price = 0;
 
@@ -151,17 +158,17 @@ function calculate() {
   else if (age === "teen") { membership = 35; name = "Premium 16-18 Membership"; }
   else if (age === "junior") { membership = 24; name = "Junior 11-15 Membership"; }
 
-  // Swim only
-  let swimOnlyPrice = 30;
-  let swimOnlyName = "Swim Only Membership";
-
-  // Pick best membership
+  // Swim Only
   let bestPrice = membership;
   let bestName = name;
 
-  if (activity === "swim" && swimOnlyPrice < bestPrice) {
-    bestPrice = swimOnlyPrice;
-    bestName = swimOnlyName;
+  if (activity === "swim") {
+    let swimOnlyPrice = 30;
+
+    if (swimOnlyPrice < bestPrice) {
+      bestPrice = swimOnlyPrice;
+      bestName = "Swim Only Membership";
+    }
   }
 
   let savings = monthly - bestPrice;
