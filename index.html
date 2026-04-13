@@ -1,4 +1,112 @@
 <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Membership Savings Calculator</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: #fff;
+    }
+
+    .container {
+      background: #ffffff;
+      color: #333;
+      padding: 30px;
+      border-radius: 20px;
+      width: 380px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 5px;
+      color: #2c5364;
+    }
+
+    p.subtitle {
+      font-size: 14px;
+      color: #777;
+      margin-bottom: 20px;
+    }
+
+    label {
+      text-align: left;
+      display: block;
+      margin-top: 15px;
+      font-weight: 600;
+    }
+
+    select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 20px;
+      padding: 14px;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #2c5364, #203a43);
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+
+    .result {
+      margin-top: 20px;
+      padding: 20px;
+      border-radius: 15px;
+      background: #f5f7fa;
+    }
+
+    .saving {
+      font-size: 22px;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .positive { color: #1aa34a; }
+    .negative { color: #d93025; }
+
+    .recommend {
+      margin-top: 10px;
+      font-weight: bold;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Membership Calculator</h1>
+  <p class="subtitle">Find the best value for your visits</p>
+
+  <label>Age Group</label>
+  <select id="age">
+    <option value="junior">11-15</option>
+    <option value="teen">16-18</option>
+    <option value="young">19-25</option>
+    <option value="adult">26-59</option>
+    <option value="senior">60+</option>
   </select>
 
   <label>Activity</label>
@@ -15,7 +123,7 @@
     <option>4</option><option>5</option><option>6</option><option>7</option>
   </select>
 
-  <button onclick="calculate()">Calculate Savings</button>
+  <button onclick="calculate()">Calculate</button>
 
   <div class="result" id="result" style="display:none;"></div>
 </div>
@@ -28,57 +136,53 @@ function calculate() {
 
   let price = 0;
 
-  // PAYG pricing
+  // Pricing logic FIXED
   if (activity === "swim") {
     price = (age === "junior") ? 4.85 : 7.05;
-  }
-  if (activity === "gym") {
+  } else if (activity === "gym") {
     if (age === "junior") price = 7.70;
     else if (age === "senior") price = 7.70;
     else price = 13.65;
-  }
-  if (activity === "class") {
+  } else if (activity === "class") {
+    if (age === "junior") {
+      alert("Fitness classes are not available for this age group");
+      return;
+    }
     price = (age === "senior") ? 6.20 : 11.05;
-  }
-  if (activity === "aqua") {
+  } else if (activity === "aqua") {
+    if (age === "junior") {
+      alert("Aqua Fit is not available for this age group");
+      return;
+    }
     price = (age === "senior") ? 6.20 : 9.55;
   }
 
-  let weekly = price * visits;
-  let monthly = weekly * 4;
+  let monthly = price * visits * 4;
 
-  // Membership pricing
   let membership = 60;
-  let membershipName = "Premium";
+  let name = "Premium";
 
-  if (age === "senior") {
-    membership = 51;
-    membershipName = "Premium Concession";
-  }
-  if (age === "young") {
-    membership = 45;
-    membershipName = "Premium 19-25";
-  }
-  if (age === "teen") {
-    membership = 35;
-    membershipName = "Premium 16-18";
-  }
-  if (age === "junior") {
-    membership = 24;
-    membershipName = "Junior 11-15";
-  }
+  if (age === "senior") { membership = 51; name = "Premium Concession"; }
+  else if (age === "young") { membership = 45; name = "Premium 19-25"; }
+  else if (age === "teen") { membership = 35; name = "Premium 16-18"; }
+  else if (age === "junior") { membership = 24; name = "Junior 11-15"; }
 
   let savings = monthly - membership;
 
-  let resultDiv = document.getElementById("result");
-  resultDiv.style.display = "block";
+  let recommendation = savings > 0 
+    ? "💡 Membership is the better option"
+    : "💡 Pay as you go is cheaper";
 
-  resultDiv.innerHTML = `
+  let result = document.getElementById("result");
+  result.style.display = "block";
+
+  result.innerHTML = `
     <p><strong>Monthly PAYG:</strong> £${monthly.toFixed(2)}</p>
-    <p><strong>Membership:</strong> ${membershipName} (£${membership})</p>
+    <p><strong>${name}:</strong> £${membership}</p>
     <p class="saving ${savings >= 0 ? 'positive' : 'negative'}">
-      ${savings >= 0 ? 'You Save' : 'You Lose'}: £${Math.abs(savings).toFixed(2)}
+      ${savings >= 0 ? 'You Save' : 'You Lose'} £${Math.abs(savings).toFixed(2)}
     </p>
+    <p class="recommend">${recommendation}</p>
   `;
 }
 </script>
