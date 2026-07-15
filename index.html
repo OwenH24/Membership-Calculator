@@ -131,7 +131,17 @@ function calculate() {
   // PAYG pricing
 if (activity === "swim") {
  
-  price = (age === "junior") ? 4.85 : 7.05;
+  if (age === "junior") {
+    price = 4.85;
+  }
+  else if (age === "senior") {
+    price = 4.30;
+  }
+  else {
+    price = 7.05;
+  }
+ 
+}
  
 } else if (activity === "gym") {
  
