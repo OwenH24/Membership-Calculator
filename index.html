@@ -129,7 +129,53 @@ function calculate() {
   let price = 0;
 
   // PAYG pricing
-  if (activity === "swim") {
+if (activity === "swim") {
+ 
+  price = (age === "junior") ? 4.85 : 7.05;
+ 
+} else if (activity === "gym") {
+ 
+  if (age === "junior") price = 7.70;
+  else if (age === "senior") price = 7.70;
+  else price = 13.65;
+ 
+} else if (activity === "class") {
+ 
+  if (age === "junior") {
+    alert("Fitness classes are not available for this age group");
+    return;
+  }
+ 
+  price = (age === "senior") ? 6.20 : 11.05;
+ 
+} else if (activity === "aqua") {
+ 
+  if (age === "junior") {
+    alert("Aqua Fit is not available for this age group");
+    return;
+  }
+ 
+  price = (age === "senior") ? 6.20 : 9.55;
+ 
+} else if (activity === "health") {
+ 
+  if (age === "junior") {
+    alert("Health Suite is only available for ages 16+");
+    return;
+  }
+ 
+  price = 25;
+ 
+} else if (activity === "hcom") {
+ 
+  if (age === "junior" || age === "teen") {
+    alert("HCOM Classes are only available for ages 19+");
+    return;
+  }
+ 
+  price = 7.20;
+ 
+}
     price = (age === "junior") ? 4.85 : 7.05;
   } else if (activity === "gym") {
     if (age === "junior") price = 7.70;
