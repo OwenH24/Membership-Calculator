@@ -197,28 +197,67 @@ if (activity === "swim") {
 
   let monthly = price * visits * 4;
 
-  // Full membership
-  let membership = 60;
-  let name = "Premium Membership";
-
-  if (age === "senior") { membership = 51; name = "Premium Concession Membership"; }
-  else if (age === "young") { membership = 45; name = "Premium 19-25 Membership"; }
-  else if (age === "teen") { membership = 35; name = "Premium 16-18 Membership"; }
-  else if (age === "junior") { membership = 24; name = "Junior 11-15 Membership"; }
-
-  // Swim Only
-  let bestPrice = membership;
-  let bestName = name;
-
-  if (activity === "swim") {
-    let swimOnlyPrice = 30;
-
+ // Default memberships
+let membership = 60;
+let name = "Premium Membership";
+ 
+if (age === "senior") {
+    membership = 51;
+    name = "Premium Concession Membership";
+}
+else if (age === "young") {
+    membership = 45;
+    name = "Premium 19-25 Membership";
+}
+else if (age === "teen") {
+    membership = 35;
+    name = "Premium 16-18 Membership";
+}
+else if (age === "junior") {
+    membership = 24;
+    name = "Junior 11-15 Membership";
+}
+ 
+let bestPrice = membership;
+let bestName = name;
+ 
+// Swim Only
+if (activity === "swim") {
+ 
+    const swimOnlyPrice = 30;
+ 
     if (swimOnlyPrice < bestPrice) {
-      bestPrice = swimOnlyPrice;
-      bestName = "Swim Only Membership";
+        bestPrice = swimOnlyPrice;
+        bestName = "Swim Only Membership";
     }
-  }
-
+ 
+}
+ 
+// Health Suite memberships
+if (activity === "health") {
+ 
+    if (age === "teen" || age === "young") {
+        bestPrice = 56;
+        bestName = "Premium+ 16-25";
+    }
+    else if (age === "adult") {
+        bestPrice = 75;
+        bestName = "Premium+";
+    }
+    else if (age === "senior") {
+        bestPrice = 63.50;
+        bestName = "Concession Premium+";
+    }
+ 
+}
+ 
+// HCOM membership
+if (activity === "hcom") {
+ 
+    bestPrice = 42;
+    bestName = "HCOM Membership";
+ 
+}
   let savings = monthly - bestPrice;
 
   let recommendation = savings > 0 
