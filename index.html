@@ -185,23 +185,6 @@ if (activity === "swim") {
  
 }
     price = (age === "junior") ? 4.85 : 7.05;
-  } else if (activity === "gym") {
-    if (age === "junior") price = 7.70;
-    else if (age === "senior") price = 7.70;
-    else price = 13.65;
-  } else if (activity === "class") {
-    if (age === "junior") {
-      alert("Fitness classes are not available for this age group");
-      return;
-    }
-    price = (age === "senior") ? 6.20 : 11.05;
-  } else if (activity === "aqua") {
-    if (age === "junior") {
-      alert("Aqua Fit is not available for this age group");
-      return;
-    }
-    price = (age === "senior") ? 6.20 : 9.55;
-  }
 
   let monthly = price * visits * 4;
 
