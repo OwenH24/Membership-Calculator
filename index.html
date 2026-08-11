@@ -213,9 +213,24 @@ else if (age === "junior") {
     membership = 24;
     name = "Junior 11-15 Membership";
 }
- 
+
 let bestPrice = membership;
 let bestName = name;
+  
+let joiningFee = 30;
+
+if (bestName === "Premium 16-18 Membership") {
+    joiningFee = 25;
+}
+else if (bestName === "Junior 11-15 Membership") {
+    joiningFee = 20;
+}
+else if (bestName === "Swim Only Membership") {
+    joiningFee = 20;
+}
+else if (bestName === "HCOM Membership") {
+    joiningFee = 0;
+}
  
 // Swim Only
 if (activity === "swim") {
@@ -254,6 +269,23 @@ if (activity === "hcom") {
     bestName = "HCOM Membership";
  
 }
+
+  // One-time joining fee
+let joiningFee = 30;
+
+if (bestName === "Premium 16-18 Membership") {
+    joiningFee = 25;
+}
+else if (bestName === "Junior 11-15 Membership") {
+    joiningFee = 20;
+}
+else if (bestName === "Swim Only Membership") {
+    joiningFee = 20;
+}
+else if (bestName === "HCOM Membership") {
+    joiningFee = 0;
+}
+  
   let savings = monthly - bestPrice;
 
   let recommendation = savings > 0 
@@ -263,14 +295,20 @@ if (activity === "hcom") {
   let result = document.getElementById("result");
   result.style.display = "block";
 
-  result.innerHTML = `
+  ```javascript
+result.innerHTML = `
     <p><strong>Monthly PAYG:</strong> £${monthly.toFixed(2)}</p>
     <p><strong>${bestName}:</strong> £${bestPrice}</p>
+    <p style="font-size: 13px; color: #777; margin-top: -5px;">
+      One time joining fee: £${joiningFee.toFixed(2)}
+    </p>
     <p class="saving ${savings >= 0 ? 'positive' : 'negative'}">
       ${savings >= 0 ? 'You Save' : 'You Lose'} £${Math.abs(savings).toFixed(2)}
     </p>
     <p class="recommend">${recommendation}</p>
   `;
+```
+
 }
 </script>
 
