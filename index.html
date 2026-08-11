@@ -1,9 +1,11 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Membership Savings Calculator</title>
+
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
@@ -12,7 +14,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      min-height: 100vh;
       color: #fff;
     }
 
@@ -22,15 +24,35 @@
       padding: 30px;
       border-radius: 20px;
       width: 380px;
+      max-width: calc(100% - 40px);
       box-shadow: 0 20px 40px rgba(0,0,0,0.3);
       text-align: center;
     }
 
-    h1 { margin-bottom: 5px; color: #ff7e5f; }
-    h2 { margin-top: 0; font-size: 16px; color: #888; font-weight: normal; }
-    p.subtitle { font-size: 14px; color: #777; margin-bottom: 20px; }
+    h1 {
+      margin-bottom: 5px;
+      color: #ff7e5f;
+    }
 
-    label { text-align: left; display: block; margin-top: 15px; font-weight: 600; }
+    h2 {
+      margin-top: 0;
+      font-size: 16px;
+      color: #888;
+      font-weight: normal;
+    }
+
+    p.subtitle {
+      font-size: 14px;
+      color: #777;
+      margin-bottom: 20px;
+    }
+
+    label {
+      text-align: left;
+      display: block;
+      margin-top: 15px;
+      font-weight: 600;
+    }
 
     select {
       width: 100%;
@@ -39,6 +61,7 @@
       border-radius: 10px;
       border: 1px solid #ccc;
       font-size: 14px;
+      box-sizing: border-box;
     }
 
     button {
@@ -54,23 +77,61 @@
       transition: 0.3s;
     }
 
-    button:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
 
-    .join-btn { background: linear-gradient(135deg, #ff512f, #dd2476); margin-top: 10px; }
+    .join-btn {
+      background: linear-gradient(135deg, #ff512f, #dd2476);
+      margin-top: 10px;
+    }
 
-    .result { margin-top: 20px; padding: 20px; border-radius: 15px; background: #fff3e6; }
+    .result {
+      margin-top: 20px;
+      padding: 20px;
+      border-radius: 15px;
+      background: #fff3e6;
+    }
 
-    .saving { font-size: 22px; font-weight: bold; margin-top: 10px; }
-    .positive { color: #1aa34a; }
-    .negative { color: #d93025; }
+    .saving {
+      font-size: 22px;
+      font-weight: bold;
+      margin-top: 10px;
+    }
 
-    .recommend { margin-top: 10px; font-weight: bold; font-size: 16px; }
-    .note { margin-top: 10px; font-size: 13px; color: #666; }
+    .positive {
+      color: #1aa34a;
+    }
+
+    .negative {
+      color: #d93025;
+    }
+
+    .recommend {
+      margin-top: 10px;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .joining-fee {
+      font-size: 13px;
+      color: #777;
+      margin-top: -5px;
+    }
+
+    .note {
+      margin-top: 10px;
+      font-size: 13px;
+      color: #666;
+    }
   </style>
 </head>
+
 <body>
 
 <div class="container">
+
   <h1>Membership Calculator</h1>
   <h2>Bulmershe Leisure Centre</h2>
   <p class="subtitle">Find the best value for your visits</p>
@@ -86,35 +147,46 @@
   </select>
 
   <label>Activity</label>
-<select id="activity">
-<option value="" disabled selected>Please select</option>
-<option value="gym">Gym</option>
-<option value="class">Fitness Classes</option>
-<option value="swim">Swimming</option>
-<option value="aqua">Aqua Fit</option>
-<option value="health">Health Suite</option>
-<option value="hcom">HCOM Class</option>
-</select>
+  <select id="activity">
+    <option value="" disabled selected>Please select</option>
+    <option value="gym">Gym</option>
+    <option value="class">Fitness Classes</option>
+    <option value="swim">Swimming</option>
+    <option value="aqua">Aqua Fit</option>
+    <option value="health">Health Suite</option>
+    <option value="hcom">HCOM Class</option>
+  </select>
 
   <label>Times per week</label>
   <select id="visits">
     <option value="" disabled selected>Please select</option>
-    <option>1</option><option>2</option><option>3</option>
-    <option>4</option><option>5</option><option>6</option><option>7</option>
+    <option>1</option>
+    <option>2</option>
+    <option>3</option>
+    <option>4</option>
+    <option>5</option>
+    <option>6</option>
+    <option>7</option>
   </select>
 
   <button onclick="calculate()">Calculate</button>
 
-  <div class="result" id="result" style="display:none;"></div>
+  <div class="result" id="result" style="display: none;"></div>
 
-  <button class="join-btn" onclick="window.open('https://placesleisure.gladstonego.cloud/memberships?siteId=195&_gl=1*1m5sxfr*_gcl_au*MTY1OTIyNzQyOC4xNzg2NDYyMTM3*_ga*MTA1OTM0NTIwOS4xNzczMzI5MDEx*_ga_XWTB06SHJZ*czE3ODY0NjIxMzckbzIkZzEkdDE3ODY0NjIyMjAkajYwJGwwJGgw', '_blank')">
+  <button
+    class="join-btn"
+    onclick="window.open('https://placesleisure.gladstonego.cloud/memberships?siteId=195', '_blank')">
     Join Now
   </button>
+
   <p class="note">Or come to reception to sign up</p>
+
 </div>
 
 <script>
+
 function calculate() {
+
   let age = document.getElementById("age").value;
   let activity = document.getElementById("activity").value;
   let visits = document.getElementById("visits").value;
@@ -128,196 +200,246 @@ function calculate() {
 
   let price = 0;
 
- // PAYG pricing
-if (activity === "swim") {
+  // -----------------------------
+  // PAY AS YOU GO PRICING
+  // -----------------------------
+
+  if (activity === "swim") {
 
     if (age === "junior") {
-        price = 4.85;
+      price = 4.85;
     }
     else if (age === "senior") {
-        price = 4.30;
+      price = 4.30;
     }
     else {
-        price = 7.05;
+      price = 7.05;
     }
 
-} else if (activity === "gym") {
+  }
+
+  else if (activity === "gym") {
 
     if (age === "junior") {
-        price = 7.70;
+      price = 7.70;
     }
     else if (age === "senior") {
-        price = 7.70;
+      price = 7.70;
     }
     else {
-        price = 13.65;
+      price = 13.65;
     }
 
-} else if (activity === "class") {
+  }
+
+  else if (activity === "class") {
 
     if (age === "junior") {
-        alert("Fitness classes are not available for this age group");
-        return;
+      alert("Fitness classes are not available for this age group");
+      return;
     }
 
     price = (age === "senior") ? 6.20 : 11.05;
 
-} else if (activity === "aqua") {
+  }
+
+  else if (activity === "aqua") {
 
     if (age === "junior") {
-        alert("Aqua Fit is not available for this age group");
-        return;
+      alert("Aqua Fit is not available for this age group");
+      return;
     }
 
     price = (age === "senior") ? 6.20 : 9.55;
 
-} else if (activity === "health") {
+  }
+
+  else if (activity === "health") {
 
     if (age === "junior") {
-        alert("Health Suite is only available for ages 16+");
-        return;
+      alert("Health Suite is only available for ages 16+");
+      return;
     }
 
     price = 25;
 
-} else if (activity === "hcom") {
+  }
+
+  else if (activity === "hcom") {
 
     if (age === "junior" || age === "teen") {
-        alert("HCOM Classes are only available for ages 19+");
-        return;
+      alert("HCOM Classes are only available for ages 19+");
+      return;
     }
 
     price = 7.20;
 
-}
+  }
 
-let monthly = price * visits * 4;
 
- // Default memberships
-let membership = 60;
-let name = "Premium Membership";
- 
-if (age === "senior") {
+  // -----------------------------
+  // MONTHLY PAYG COST
+  // -----------------------------
+
+  let monthly = price * visits * 4;
+
+
+  // -----------------------------
+  // DEFAULT MEMBERSHIPS
+  // -----------------------------
+
+  let membership = 60;
+  let name = "Premium Membership";
+
+  if (age === "senior") {
     membership = 51;
     name = "Premium Concession Membership";
-}
-else if (age === "young") {
+  }
+
+  else if (age === "young") {
     membership = 45;
     name = "Premium 19-25 Membership";
-}
-else if (age === "teen") {
+  }
+
+  else if (age === "teen") {
     membership = 35;
     name = "Premium 16-18 Membership";
-}
-else if (age === "junior") {
+  }
+
+  else if (age === "junior") {
     membership = 24;
     name = "Junior 11-15 Membership";
-}
+  }
 
-let bestPrice = membership;
-let bestName = name;
-  
-let joiningFee = 30;
 
-if (bestName === "Premium 16-18 Membership") {
-    joiningFee = 25;
-}
-else if (bestName === "Junior 11-15 Membership") {
-    joiningFee = 20;
-}
-else if (bestName === "Swim Only Membership") {
-    joiningFee = 20;
-}
-else if (bestName === "HCOM Membership") {
-    joiningFee = 0;
-}
- 
-// Swim Only
-if (activity === "swim") {
- 
+  let bestPrice = membership;
+  let bestName = name;
+
+
+  // -----------------------------
+  // SWIM ONLY MEMBERSHIP
+  // -----------------------------
+
+  if (activity === "swim") {
+
     const swimOnlyPrice = 30;
- 
+
     if (swimOnlyPrice < bestPrice) {
-        bestPrice = swimOnlyPrice;
-        bestName = "Swim Only Membership";
+      bestPrice = swimOnlyPrice;
+      bestName = "Swim Only Membership";
     }
- 
-}
- 
-// Health Suite memberships
-if (activity === "health") {
- 
+
+  }
+
+
+  // -----------------------------
+  // HEALTH SUITE MEMBERSHIPS
+  // -----------------------------
+
+  if (activity === "health") {
+
     if (age === "teen" || age === "young") {
-        bestPrice = 56;
-        bestName = "Premium+ 16-25";
+      bestPrice = 56;
+      bestName = "Premium+ 16-25";
     }
+
     else if (age === "adult") {
-        bestPrice = 75;
-        bestName = "Premium+";
+      bestPrice = 75;
+      bestName = "Premium+";
     }
+
     else if (age === "senior") {
-        bestPrice = 63.50;
-        bestName = "Concession Premium+";
+      bestPrice = 63.50;
+      bestName = "Concession Premium+";
     }
- 
-}
- 
-// HCOM membership
-if (activity === "hcom") {
- 
+
+  }
+
+
+  // -----------------------------
+  // HCOM MEMBERSHIP
+  // -----------------------------
+
+  if (activity === "hcom") {
+
     bestPrice = 42;
     bestName = "HCOM Membership";
- 
-}
 
-  // One-time joining fee
-let joiningFee = 30;
+  }
 
-if (bestName === "Premium 16-18 Membership") {
+
+  // -----------------------------
+  // ONE-TIME JOINING FEE
+  // -----------------------------
+
+  let joiningFee = 30;
+
+  if (bestName === "Premium 16-18 Membership") {
     joiningFee = 25;
-}
-else if (bestName === "Junior 11-15 Membership") {
+  }
+
+  else if (bestName === "Junior 11-15 Membership") {
     joiningFee = 20;
-}
-else if (bestName === "Swim Only Membership") {
+  }
+
+  else if (bestName === "Swim Only Membership") {
     joiningFee = 20;
-}
-else if (bestName === "HCOM Membership") {
+  }
+
+  else if (bestName === "HCOM Membership") {
     joiningFee = 0;
-}
-  
+  }
+
+
+  // -----------------------------
+  // SAVINGS CALCULATION
+  // -----------------------------
+
   let savings = monthly - bestPrice;
 
-  let recommendation = savings > 0 
+
+  let recommendation = savings > 0
     ? "💡 " + bestName + " is the best option"
     : "💡 Pay as you go is cheaper";
 
+
+  // -----------------------------
+  // DISPLAY RESULT
+  // -----------------------------
+
   let result = document.getElementById("result");
+
   result.style.display = "block";
 
-  ```javascript
-```javascript
-result.innerHTML = `
-    <p><strong>Monthly PAYG:</strong> £${monthly.toFixed(2)}</p>
-    <p><strong>${bestName}:</strong> £${bestPrice}</p>
-    <p style="font-size: 13px; color: #777; margin-top: -5px;">
+  result.innerHTML = `
+    <p>
+      <strong>Monthly PAYG:</strong>
+      £${monthly.toFixed(2)}
+    </p>
+
+    <p>
+      <strong>${bestName}:</strong>
+      £${bestPrice.toFixed(2)}
+    </p>
+
+    <p class="joining-fee">
       One time joining fee: £${joiningFee.toFixed(2)}
     </p>
+
     <p class="saving ${savings >= 0 ? 'positive' : 'negative'}">
-      ${savings >= 0 ? 'You Save' : 'You Lose'} £${Math.abs(savings).toFixed(2)}
+      ${savings >= 0 ? 'You Save' : 'You Lose'}
+      £${Math.abs(savings).toFixed(2)}
     </p>
-    <p class="recommend">${recommendation}</p>
+
+    <p class="recommend">
+      ${recommendation}
+    </p>
   `;
-```
-
-<p class="recommend">${recommendation}</p>
-`;
-}
-
-```
 
 }
+
 </script>
 
 </body>
 </html>
+```
